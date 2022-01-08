@@ -1,0 +1,4 @@
+.vscode/
+*.o
+harmonics-dwf-20210110/
+libtcd-2.2.7/
