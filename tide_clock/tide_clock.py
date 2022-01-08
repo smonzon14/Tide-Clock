@@ -13,6 +13,10 @@ from datetime import datetime as d
 # include -t in arguments to switch to testing
 testing = "-t" in sys.argv
 
+prevTideTime = 372.5
+minsBetweenTides = 372.5
+nextTide = ''
+
 if not testing:
     try:
         from waveshare_epd import epd7in5
@@ -33,17 +37,33 @@ def rotate(p, origin=(0, 0), degrees=0):
 # Determines whether the clock hand is moving towards high or low tide and calculates the time left
 # Then feeds this info to draw()
 def update():
+    global nextTide, prevTideTime, minsBetweenTides
     now = d.now()
+    # now = d.strptime("2022-01-08 12:45 AM","%Y-%m-%d %I:%M %p")
     # High/Low tide info from tide output
     output = subprocess.run(["tide","-l",location,"-b",now.strftime("%Y-%m-%d %H:%M"),"-m","n"],shell=False, capture_output=True).stdout
     output = output.decode("utf-8").split('\n')[1:3] # obtains 2nd and 3rd lines which should always be H/L tides
-    e1 = output[0]
+    e1 = output[0] # the tide we are concerned about
     e2 = output[1]
     time1 = d.strptime(output[0][3:26],"%Y-%m-%d %I:%M %p %Z")
     # time2 = d.strptime(output[1][3:26],"%Y-%m-%d %I:%M %p %Z")
-    minutesUntilEvent = (time1 - now).total_seconds() / 60
-    tideMinutes = 745 - minutesUntilEvent if e1[0] == 'H' else 372.5 - minutesUntilEvent
-    draw(tideMinutes, e1[3:], e2[3:])
+    minsUntilEvent = (time1 - now).total_seconds() / 60
+
+    if nextTide == '':
+        
+        nextTide = e1[0]
+        prevTideTime = time1
+    elif nextTide != e1[0]:
+        minsBetweenTides = (time1 - prevTideTime).total_seconds() / 60
+        nextTide = e1[0]
+        prevTideTime = time1
+        print(minsBetweenTides)
+
+    # map tide time difference of previous and next tide to 6 hours = 372.5 tide minutes = 180 degrees time span
+    minsUntilNextTide = (minsBetweenTides - minsUntilEvent) * 372.5/minsBetweenTides
+    tideMins = 372.5 + minsUntilNextTide if e1[0] == 'H' else minsUntilNextTide
+
+    draw(tideMins, e1[3:], e2[3:])
 
 # --- Draw on PNG or EDP
 def draw(tideMinutes, hText, lText):
