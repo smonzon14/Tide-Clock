@@ -1,0 +1,129 @@
+   [1]<- Previous [2]Contents
+
+Icon News
+
+Minor updates 2020-06-28
+
+   The XTide, Congen, libtcd, and tideEditor packages have all been
+   touched to perform some minor but messy maintenance.  Build scripts
+   that were specific to particular flavors of Linux and to non-Unix
+   platforms were moved into a new separate package, FunkyBuilds;
+   configure scripts were patched to improve portability; old URLs were
+   updated, and documentation nits were fixed.  XTide got a bugfix
+   increment because some of the outdated URLs were in the source code;
+   the other three packages are just re-releases.
+
+   FunkyBuilds includes a new build script for Ubuntu and an improved one
+   for DOS.  A new DOS binary has been posted under Contrib.
+
+   All available from [3]https://flaterco.com/xtide/files.html.
+
+Data refresh 2019-12-29
+
+   Data refresh available from
+   [4]https://flaterco.com/xtide/files.html#harmonicsfiles.
+
+   A corresponding update of the harmonic constants management package is
+   available from [5]https://flaterco.com/xtide/files.html#experts.
+
+New currents for Salish Sea / Puget Sound (2019-06-20)
+
+   Updated harmonics available from
+   [6]https://flaterco.com/xtide/files.html#harmonicsfiles include new
+   Salish Sea / Puget Sound currents that were obtained from NOAA by
+   Charles Douglass.  All other data are untouched from 2018-12-27.
+
+End of maintenance for non-free data
+
+   For [7]various reasons, I have ended maintenance of the non-free data
+   set.  Anyone interested in generating new harmonic constants from
+   published data can find information and a list of data sources [8]here.
+
+Mailing list
+
+   There is an announce-only mailing list to which I send notices of each
+   update to XTide or the harmonics data.  You can subscribe or read the
+   archives at [9]http://ten.pairlist.net/mailman/listinfo/xtide-announce.
+
+   Please note:  If an announcement to you gets bounced by your mail
+   server, you fall off the list.  Some long-time contributors have fallen
+   off because, unbeknownst to them, their ISPs subscribed to a spam
+   blackholing service that blackholed all pair.com-hosted domains after
+   one of them sent out spam.
+
+To do list
+
+   XTide
+     * If libxtide is changed, consider merging some accommodations from
+       XTideMac.
+          + Opting out of LibPNG, RGBGraph, Settings, and codeset support.
+          + Compiler was opinionated about character encoding and int
+            types.
+          + Configure for dirent.h, syslog.h.
+     * Purge antique portability workarounds.
+     * Make xttpd use https.
+     * Support lookup by station ID instead of only name.
+     * The XML parser should be bundled under the libxtide namespace but
+       isn't.
+
+   Major things to do in XTide 3 if life turns out not to be too short
+   after all:
+     * Support major and minor axes for currents; yield speed and
+       direction at any time.
+     * Renovate programming practices again (exceptions, checked and const
+       operations, strings).
+     * On exceptions:  get the application-specific error messages OUT of
+       libxtide.
+     * Move from Latin-1 to UTF-8 (requires libtcd revision).
+     * Harmonize the globe location chooser with the way that Google Earth
+       operates.  Use OpenGL of course.
+     * Find a way to put an end to the infinite number of customization
+       settings for graph mode, such as by dumping ALL of the data,
+       metadata, and events to a single-file format that an external
+       graphing app will read.
+     * Support Wayland in non-X11 mode.
+
+   harmgen
+
+   It should be possible to [10]link directly with liboctave to avoid the
+   very inefficient conversion of input data from binary to text and back
+   again that currently is done.  However, this would be fixing something
+   that is not broken, and is neither important nor urgent.
+
+   libtcd
+
+   Purge antique portability workarounds from configure.ac.  Always just
+   include stdint not inttypes.
+
+   Things to do in the next major revision, if there ever is one:
+     * Purge COMPAT114 code and documentation.
+     * UTF-8.
+     * Add header field to flag tides versus currents.
+     * Add depth field for currents.
+     * Support major and minor axes for currents.
+     * Get rid of internal state; fix inability to have more than one
+       database open.
+     * Remove gratuitous complexity in the encoding of speeds, equilibrium
+       arguments, and node factors; make speeds 32-bit unsigned with no
+       offset.
+     * Possibly permit node factors to be specified for intervals shorter
+       than 1 year and/or support apps that use libcongen to generate the
+       node factors themselves.
+     __________________________________________________________________
+
+   [11]<- Previous [12]Contents
+
+References
+
+   1. https://flaterco.com/xtide/changelog.html
+   2. https://flaterco.com/xtide/xtide.html#contents
+   3. https://flaterco.com/xtide/files.html
+   4. https://flaterco.com/xtide/files.html#harmonicsfiles
+   5. https://flaterco.com/xtide/files.html#experts
+   6. https://flaterco.com/xtide/files.html#harmonicsfiles
+   7. https://flaterco.com/xtide/faq.html#renaissance
+   8. https://flaterco.com/xtide/harmonics.html#harmgen
+   9. http://ten.pairlist.net/mailman/listinfo/xtide-announce
+  10. https://www.gnu.org/software/octave/doc/interpreter/Standalone-Programs.html
+  11. https://flaterco.com/xtide/changelog.html
+  12. https://flaterco.com/xtide/xtide.html#contents

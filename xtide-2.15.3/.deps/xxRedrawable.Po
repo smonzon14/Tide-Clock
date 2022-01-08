@@ -1,0 +1,4 @@
+xxRedrawable.o: xxRedrawable.cc /usr/include/stdc-predef.h \
+ xxRedrawable.hh
+/usr/include/stdc-predef.h:
+xxRedrawable.hh:

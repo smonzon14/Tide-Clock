@@ -1,0 +1,4 @@
+xxReconfigurable.o: xxReconfigurable.cc /usr/include/stdc-predef.h \
+ xxReconfigurable.hh
+/usr/include/stdc-predef.h:
+xxReconfigurable.hh:
