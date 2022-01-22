@@ -1,5 +1,5 @@
 # Tide Clock
-
+![alt text](https://github.com/smonzon14/Tide-Clock/blob/main/tide_clock/tide_clock.png?raw=true)
 ### Contains xtide-2.15.3
 
 Added a new mode (-m n) for spitting out next high and low tide in chronological order. Requires libtcd-2.2.7 and .tcd harmonics file
